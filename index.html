@@ -5,18 +5,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Train Scheduler</title>
+    <!-- css style sheet link -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- bootstrap style sheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Train Scheduler</title>
 </head>
 
 <body>
+    <nav>
+
+
+    </nav>
+
+    <main>
+        <!-- Train schedule display area -->
+        <div class="container" id="currentTrainSchedule">
+            <table class="table">
+                <tr class="table-success">
+                    <th scope="col">#</th>
+                    <th scope="col">Train Name</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Frequency (min)</th>
+                    <th scope="col">Next Arrival</th>
+                    <th scope="col">Minutes Away</th>
+                </tr>
+                <tr>
+                    <th scope="row" class="trainName">Train Namee</th>
+                    <td scope="row" class="destination">Destination</td>
+                    <td scope="row" class="frequency">Frequency (min)</td>
+                    <td scope="row" class="next">Next Arrival</td>
+                    <td scope="row" class="minAway">Minutes Away</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="inputArea">
+            <div class="addTrain">
+                <p>Add Train</p>
+            </div>
+            <!-- Text input area -->
+            <form>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Train Name</label>
+                    <input type="text" class="form-control" id="trainName">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Destination</label>
+                    <input type="text" class="form-control" id="destination">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">First Train Time (HH:MM - Military time)</label>
+                    <input type="text" class="form-control" id="firstTrainTime">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Frequency</label>
+                    <input type="text" class="form-control" id="frequency">
+                </div>
+            </form>
+
+            <button class="btn">Submit</button>
+
+        </div>
 
 
 
 
+    </main>
 
+    <footer>
 
+    </footer>
 
+    <!------------------------------------------------------------------------------------------------>
+    <!-- ------------------------------ JavaScript links ------------------------------------------ -->
+    <!------------------------------------------------------------------------------------------------>
     <!-- firebase link -->
     <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
     <!-- firebase realtime link -->

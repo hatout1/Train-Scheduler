@@ -13,19 +13,31 @@ $(document).ready(function () {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
+    const db = firebase.database()
 
+    // arrays to hold admin entries
+    var trainName = [];
+    var destination = [];
+    var firstTrainTime = [];
+    var frequency = [];
 
-    const api_key = 'QVMZ - 5PSG - 9IKT - DWE9'
+    // function that collect data on click submit btn and assign it to arrays
+    $('.btn').on('click', function () {
+        (trainName).push($('#trainName').val());
+        (destination).push($('#destination').val());
+        (firstTrainTime).push($('#firstTrainTime').val());
+        (frequency).push($('#frequency').val());
 
+        // console.log(trainName);
 
+    });
 
-    $.ajax({
-        url: 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=ASHB&dest=CIVC&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1&json=y',
-        type: "GET"
-    }).then(data => {
-        console.log(data)
+    db.ref().on('value', snap => {
+
+        // console.log(snap.val());
 
     })
+
 
 
 });
