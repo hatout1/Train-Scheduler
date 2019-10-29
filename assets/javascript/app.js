@@ -21,23 +21,33 @@ $(document).ready(function () {
     var firstTrainTime = [];
     var frequency = [];
 
+    // variable to help with entries order
+    var ordernumber = 0;
+
     // function that collect data on click submit btn and assign it to arrays
-    $('.btn').on('click', function () {
-        (trainName).push($('#trainName').val());
-        (destination).push($('#destination').val());
-        (firstTrainTime).push($('#firstTrainTime').val());
-        (frequency).push($('#frequency').val());
+    $('.btn').on('click', function (event) {
+        event.preventDefault();
+
+        // increment ordernumber when the buton clicked
+        ordernumber += 1;
+        console.log(ordernumber)
+
+        // function that creates and add data to firebase.
+        db.ref(ordernumber).set({
+            ordernumber: ordernumber,
+            trainName: $('#trainName').val(),
+            destination: $('#destination').val(),
+            firstTrainTime: $('#firstTrainTime').val(),
+            frequency: $('#frequency').val(),
+        });
 
         // console.log(trainName);
 
+        db.ref(ordernumber).on('value', snap => {
+            console.log(snap.val());
+
+        })
+
     });
-
-    db.ref().on('value', snap => {
-
-        // console.log(snap.val());
-
-    })
-
-
 
 });
