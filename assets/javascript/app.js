@@ -60,15 +60,15 @@ $(document).ready(function () {
     //  function to bring back the data from firebase
     db.ref('trainschedule').on('value', snap => {
         trainNameArray = snap.val().train
-        destinationArray = snap.val().train
-        firstTrainTimeArray = snap.val().train
-        frequencyArray = snap.val().train
+        destinationArray = snap.val().trainDistination
+        firstTrainTimeArray = snap.val().trainFirstTrain
+        frequencyArray = snap.val().trainFrequency
 
         // function to avoid multi entries of data.
-        $('#trainName').empty();
-        $('#destination').empty();
-        $('#firstTrainTime').empty();
-        $('#frequency').empty();
+        $('.trainName').empty();
+        $('.destination').empty();
+        $('.firstTrainTime').empty();
+        $('.frequency').empty();
 
         // function to append the values to the webpage
         trainNameArray.map((train) => {
