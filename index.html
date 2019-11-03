@@ -10,6 +10,8 @@
     <!-- bootstrap style sheet -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- reference Moment.js library -->
+
 
     <title>Train Scheduler</title>
 </head>
@@ -17,31 +19,23 @@
 <body>
     <nav>
 
-
     </nav>
 
     <main>
         <!-- Train schedule display area -->
         <div class="container" id="currentTrainSchedule">
-            <table class="table">
-                <tr class="table-success">
-                    <th scope="col">#</th>
-                    <th scope="col">Train Name</th>
-                    <th scope="col">Destination</th>
-                    <th scope="col">Frequency (min)</th>
-                    <th scope="col">Next Arrival</th>
-                    <th scope="col">Minutes Away</th>
-                </tr>
-                <div class="display" id="display">
+            <table class="table table-striped" id="trainScheduleTable">
+                <thead>
                     <tr>
-                        <th scope="row" class="orderNumber"> <span></span> </th>
-                        <td scope="row" class="trainName" id="displayName"></td>
-                        <td scope="row" class="destination" id="displayDestination"></td>
-                        <td scope="row" class="frequency" id="displayFrequency"></td>
-                        <td scope="row" class="next">Next Arrival</td>
-                        <td scope="row" class="minAway">Minutes Away</td>
+                        <th>Train Name</th>
+                        <th>Destination</th>
+                        <th>Frequency (min)</th>
+                        <th>Next Arrival</th>
+                        <th>Minutes Away</th>
                     </tr>
-                </div>
+                </thead>
+                <tbody>
+                </tbody>
             </table>
         </div>
 
@@ -61,7 +55,7 @@
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">First Train Time (HH:MM - Military time)</label>
-                    <input type="time" class="form-control" id="firstTrainTime" min="00:00" max="23:59" required>
+                    <input type="text" class="form-control" id="firstTrainTime">
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Frequency</label>
@@ -82,9 +76,11 @@
 
     </footer>
 
+
     <!------------------------------------------------------------------------------------------------>
     <!-- ------------------------------ JavaScript links ------------------------------------------ -->
     <!------------------------------------------------------------------------------------------------>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <!-- firebase link -->
     <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
     <!-- firebase realtime link -->
@@ -96,6 +92,7 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- local javescript link -->
     <script src="./assets/javascript/app.js"></script>
+    <!-- <script src="./moment/moment.min.js"></script> -->
 
 </body>
 

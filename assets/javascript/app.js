@@ -16,38 +16,28 @@ $(document).ready(function () {
 
     // const database as small name for easy use.
     const db = firebase.database()
-
-    // arrays to hold admin entries
-    let trainNameArray = [];
-    let destinationArray = [];
-    let firstTrainTimeArray = [];
-    let frequencyArray = [];
-
+    // const moment time function
+    const currentTime = moment().format();
 
     // function that collect data on click submit btn and assign it to arrays
     $('.btn').on('click', function (event) {
         event.preventDefault();
 
-        // make value as a const to push them after to arrays
-        const trainName = $('#trainName').val();
-        const distination = $('#destination').val();
-        const firstTrain = $('#firstTrainTime').val();
-        const frequency = $('#frequency').val();
+        // transfer collected values to a object to push them after to arrays
+        var trainName = $('#trainName').val().trim();
+        var distination = $('#destination').val().trim();
+        var firstTrain = moment($('#firstTrainTime').val().trim(), "HH:mm").format("HH:mm");
+        var frequency = $('#frequency').val().trim();
 
-        // puch values to the arrays
-        trainNameArray.push(trainName);
-        destinationArray.push(distination)
-        firstTrainTimeArray.push(firstTrain)
-        frequencyArray.push(frequency)
+        var newTrain = {
+            train: trainName,
+            trainDistination: distination,
+            trainFirstTrain: firstTrain,
+            trainFrequency: frequency,
+        }
 
         // function that creates and add data to firebase.
-        db.ref('trainschedule').set({
-
-            train: trainNameArray,
-            trainDistination: destinationArray,
-            trainFirstTrain: firstTrainTimeArray,
-            trainFrequency: frequencyArray,
-        });
+        db.ref().push(newTrain);
 
         // to clear input area after submition of entries
         $('#trainName').val('');
@@ -58,11 +48,11 @@ $(document).ready(function () {
 
 
     //  function to bring back the data from firebase
-    db.ref('trainschedule').on('value', snap => {
-        trainNameArray = snap.val().train
-        destinationArray = snap.val().trainDistination
-        firstTrainTimeArray = snap.val().trainFirstTrain
-        frequencyArray = snap.val().trainFrequency
+    db.ref().on("child_added", function (snap, prevChildKey) {
+        var trainNameT = snap.val().train
+        var destinationT = snap.val().trainDistination
+        var firstTrainTimeT = snap.val().trainFirstTrain
+        var frequencyT = snap.val().trainFrequency
 
         // function to avoid multi entries of data.
         $('.trainName').empty();
@@ -70,26 +60,19 @@ $(document).ready(function () {
         $('.firstTrainTime').empty();
         $('.frequency').empty();
 
+        // converte first train time to minutes.
+        let startTimeConverted = moment(firstTrainTimeT, "HH:mm");
+        // the difference minutes between now and the first train
+        let timeDiff = moment().diff(moment(startTimeConverted, "minutes"));
+        // to calculate the difference left
+        let timeRemain = Math.abs(timeDiff % frequencyT);
+        // minutes to next train
+        let minToArrival = frequencyT - timeRemain;
+        // next train time
+        let nextTrain = moment(currentTime).add((minToArrival), "minutes").format("hh:mm A");
+
         // function to append the values to the webpage
-        trainNameArray.map((train) => {
-            $('#displayName').append(`<tr><td>${train}</td></tr>`)
-        });
-
-        destinationArray.map((trainDistination) => {
-            $('#displayDestination').append(`<tr><td>${trainDistination}</td></tr>`)
-        });
-
-        frequencyArray.map((trainFrequency) => {
-            $('#displayFrequency').append(`<tr><td>${trainFrequency}</td></tr>`)
-        });
-
+        $("#trainScheduleTable > tbody").append("<tr><td>" + trainNameT + "</td><td>" + destinationT + "</td><td>" + frequencyT + "</td><td>" + nextTrain + "</td><td>" + timeRemain + "</td></tr>")
 
     });
-
-
-    // still need to work on function that calculates "Next arrival train 
-    // & another that calculate "minutes away"
-
-
-
 });
