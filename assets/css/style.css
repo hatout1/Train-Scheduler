@@ -1,5 +1,45 @@
 *{
     margin: 0px;
-    background-color: beige;
+    background-color:none;
 }
+
+
+#rainScheduleTable {
+    width: 60%;
+    margin-left:20%;
+    margin-right: 20%;
+    background-color: black;
+}
+.table{
+    background-color: rgba(106, 165, 243, 0.562);
+    margin-top: 40px;
+    }
+
+.inputArea{
+    margin-top: 100px;
+    width: 60%;
+    margin-left:20%;
+    margin-right: 20%;
+}
+
+.form-control{
+    width: 50%;
+    scroll-margin-left: 5%;
+    
+}
+
+form, .addTrain{
+    width: 100%;
+    margin-left: 5%;
+    
+}
+.btn{
+    background-color: gray;
+    margin-left: 5%;
+}
+.btn:hover{
+    background-color: blue;
+    color: white;
+}
+
 

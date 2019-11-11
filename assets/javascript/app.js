@@ -17,7 +17,7 @@ $(document).ready(function () {
     // const database as small name for easy use.
     const db = firebase.database()
     // const moment time function
-    const currentTime = moment().format();
+    let currentTime = moment().format();
 
     // function that collect data on click submit btn and assign it to arrays
     $('.btn').on('click', function (event) {
@@ -26,7 +26,7 @@ $(document).ready(function () {
         // transfer collected values to a object to push them after to arrays
         var trainName = $('#trainName').val().trim();
         var distination = $('#destination').val().trim();
-        var firstTrain = moment($('#firstTrainTime').val().trim(), "HH:mm").format("HH:mm");
+        var firstTrain = moment($('#firstTrainTime').val().trim(), "HHmm").format("HH:mm");
         var frequency = $('#frequency').val().trim();
 
         var newTrain = {
@@ -48,10 +48,11 @@ $(document).ready(function () {
 
 
     //  function to bring back the data from firebase
-    db.ref().on("child_added", function (snap, prevChildKey) {
+    db.ref().on("child_added", function (snap) {
         var trainNameT = snap.val().train
         var destinationT = snap.val().trainDistination
         var firstTrainTimeT = snap.val().trainFirstTrain
+        console.log(firstTrainTimeT)
         var frequencyT = snap.val().trainFrequency
 
         // function to avoid multi entries of data.
@@ -62,17 +63,29 @@ $(document).ready(function () {
 
         // converte first train time to minutes.
         let startTimeConverted = moment(firstTrainTimeT, "HH:mm");
+        console.log(startTimeConverted)
         // the difference minutes between now and the first train
-        let timeDiff = moment().diff(moment(startTimeConverted, "minutes"));
+        console.log(moment())
+        let timeDiff = moment().diff(startTimeConverted, "minutes");
+        console.log(timeDiff)
         // to calculate the difference left
         let timeRemain = Math.abs(timeDiff % frequencyT);
+        console.log(timeRemain)
         // minutes to next train
         let minToArrival = frequencyT - timeRemain;
+        console.log(minToArrival)
         // next train time
-        let nextTrain = moment(currentTime).add((minToArrival), "minutes").format("hh:mm A");
+        let nextTrain;
+        console.log(moment(firstTrainTimeT, "minutes"))
+        if (moment(firstTrainTimeT, "minutes") >= moment()) {
+
+            nextTrain = (moment(firstTrainTimeT, "minutes").format("HH:mm"))
+        } else {
+            nextTrain = moment(currentTime).add((minToArrival), "minutes").format("hh:mm A");
+        }
 
         // function to append the values to the webpage
-        $("#trainScheduleTable > tbody").append("<tr><td>" + trainNameT + "</td><td>" + destinationT + "</td><td>" + frequencyT + "</td><td>" + nextTrain + "</td><td>" + timeRemain + "</td></tr>")
+        $("#trainScheduleTable > tbody").append("<tr><td>" + trainNameT + "</td><td>" + destinationT + "</td><td>" + frequencyT + "</td><td>" + nextTrain + "</td><td>" + minToArrival + "</td></tr>")
 
     });
 });
