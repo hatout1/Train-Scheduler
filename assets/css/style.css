@@ -1,45 +1,82 @@
 *{
     margin: 0px;
     background-color:none;
+    /* background-color: blanchedalmond; */
 }
 
-
-#rainScheduleTable {
-    width: 60%;
-    margin-left:20%;
-    margin-right: 20%;
-    background-color: black;
+body{
+background-image: url('../images/train1.jpeg');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
 }
+
+main{
+    min-height: 100vh;
+}
+
+#trainScheduleTable {
+    width: 80%;
+    margin-left:10%;
+    margin-right: 10%;
+    
+}
+
+#addTrain{
+    background-color: rgba(0, 255, 234, 0.425);
+    width:100%;
+    padding: 15px;
+}
+
 .table{
-    background-color: rgba(106, 165, 243, 0.562);
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.425), #fff,rgba(85, 88, 97, 0.61));
     margin-top: 40px;
-    }
+    font-size: 18px;
+}
 
 .inputArea{
     margin-top: 100px;
-    width: 60%;
-    margin-left:20%;
-    margin-right: 20%;
+    width: 50%;
+    margin-left:25%;
+    margin-right: 25%;
 }
 
 .form-control{
     width: 50%;
     scroll-margin-left: 5%;
-    
+}
+
+form{
+    font-size: 18px;
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.425), #fff,rgba(85, 88, 97, 0.61));
+
 }
 
 form, .addTrain{
-    width: 100%;
-    margin-left: 5%;
-    
+    width: 100%;   
 }
+
+.form-group{
+    margin-left: 5%;
+}
+
+.form-group:last-child{
+padding-bottom: 5%;
+}
+
 .btn{
-    background-color: gray;
+    background-color: rgb(247, 244, 93);
     margin-left: 5%;
+    width: 150px;
 }
+
 .btn:hover{
     background-color: blue;
     color: white;
 }
 
+label{
+    font-size: 20px;
+    font-weight: bold;
+}
 
